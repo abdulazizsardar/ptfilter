@@ -2,7 +2,7 @@
 /**
  * Plugin Name: PT Filter
  * Description: <a href="#">hello</a> is the most advanced frontend drag & drop page builder addon
- * Plugin URI:  https://abdulazizz.xyz
+ * Plugin URI:  https://wordpress.org/plugins/pfilter/
  * Version:     1.0.0
  * Author:      Abdul Aziz Sardar
  * Author URI:  https://abdulazizz.xyz
