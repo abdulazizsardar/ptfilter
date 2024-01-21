@@ -1,13 +1,14 @@
 === PT Filter ===
 Contributors: aponwpdev
-Tags: custom post ajax filter template, filter, templates, ajax, load more
-Requires at least: 4.9
-Tested up to: 5.8
+Requires at least: 6.1
+Tested up to: 6.4
 Stable tag: 1.0.0
+Requires PHP: 7.3
+Version: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-<a href="https://abdulazizz.xyz">PT Filter</a> is a custom post ajax page template.
+PT Filter is a custom post ajax page template.
 
 == Description ==
 
@@ -17,8 +18,6 @@ PT Filter is the most acustom post ajax page template. It provides features like
 - Filter content on your pages
 - Ajax loading for a seamless user experience
 - Custom page templates for versatile layouts
-
-For more information, visit the [plugin homepage](https://abdulazizz.xyz).
 
 == Installation ==
 
