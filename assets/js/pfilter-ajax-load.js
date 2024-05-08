@@ -5,19 +5,25 @@
             var container = $('#ajax-filter-container');
             var categoryContainer = $('#ajax-category-container');
 
+
             $(document).on('click', '.filter-button', function(e) {
                 var selectedCategory = $(this).data('category');
-                loadContent(selectedCategory);
+                var pt_nonce2 = $(this).data('nonce');
+                loadContent(selectedCategory,pt_nonce2);
             });
 
             $(document).on('click', '.filter-all', function(e) {
-                loadContent('all');
+                let cat = 'all';
+                var pt_nonce2 = $(this).data('nonce');
+                loadContent(cat,pt_nonce2);
             });
 
-            function loadContent(category) {
+            function loadContent(category,pt_nonce2) {
+                
                 var data = {
                     action: 'ajax_filter',
                     category: category,
+                    nonce: pt_nonce2,
                 };
                 $.ajax({
                     type: 'POST',
@@ -32,13 +38,16 @@
                 });
             }
 
-
+            
+           // console.log(pt_nonce)
         //// *=====* Ajax Loadmore Button Code Here *======* ////
         var page = 2; 
             $('#load-more-button').on('click', function () {
+                let pt_nonce = document.querySelector("#pt_filter_nonce_field").value;
                 var data = {
                     action: 'ajax_load_more_portfolio',
                     page: page,
+                    pt_nonce: pt_nonce
                 };
 
                 $.ajax({
@@ -60,10 +69,6 @@
                 });
             });
         //// *=====* Ajax Filtering and  loadmor button Code Here *======* ////
-
-        
-
-
 
 
         

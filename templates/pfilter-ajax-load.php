@@ -1,49 +1,52 @@
 <?php
 /*
  * Template Name: Filter Template
- */
-
-get_header(); 
+*/
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+get_header();
 ?>
 
 <div class="apon-filter portfolio-filter text-center">
-    <button class="filter-button filter-all active" data-category=""><?php echo esc_html('All', 'pfilter'); ?></button>
+    <?php $nonce =  wp_create_nonce( "filter-button-nonce" ); ?>
+    <button class="filter-button filter-all active" data-nonce="<?php echo esc_attr($nonce );?>"
+        data-category=""><?php echo esc_html('All', 'pt-filter'); ?></button>
 
     <?php
-         $taxonomy = 'portfolio_category';
-         $select_cat = get_terms($taxonomy);
+    $taxonomy = 'portfolio_category';
+    $select_cat = get_terms($taxonomy);
 
-         foreach ($select_cat as $category) {
-            ?>
-             <button class="filter-button" data-category="<?php echo esc_attr($category->slug); ?>"><?php echo esc_html($category->name); ?></button> 
-            <?php
-        }
+    foreach ($select_cat as $category) {
+    ?>
+    <button class="filter-button" data-nonce="<?php echo esc_attr($nonce );?>"
+        data-category="<?php echo esc_attr($category->slug); ?>"><?php echo esc_html($category->name); ?></button>
+    <?php
+    }
     ?>
 </div>
 
-    
+
 <div class="container">
     <div class="grid row" id="ajax-filter-container">
         <?php
         $all_posts = new WP_Query(array(
             'post_type'      => 'portfolios',
             'posts_per_page' => -1,
-        )); 
+        ));
 
         while ($all_posts->have_posts()) : $all_posts->the_post();
-            ?>
-            <div class="col-lg-4 grid-item all">
-                <div class="portfolio-item content-overlay">
-                    <?php if (has_post_thumbnail()) : ?>
-                        <a href="<?php the_permalink(); ?>">
-                            <div class="portfolio-img">
-                                <?php the_post_thumbnail(); ?>
-                            </div>
-                        </a>
-                    <?php endif; ?>
-                </div>
+        ?>
+        <div class="col-lg-4 grid-item all">
+            <div class="portfolio-item content-overlay">
+                <?php if (has_post_thumbnail()) : ?>
+                <a href="<?php the_permalink(); ?>">
+                    <div class="portfolio-img">
+                        <?php the_post_thumbnail(); ?>
+                    </div>
+                </a>
+                <?php endif; ?>
             </div>
-            <?php
+        </div>
+        <?php
         endwhile;
         wp_reset_postdata();
         ?>
