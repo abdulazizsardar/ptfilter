@@ -3,7 +3,17 @@
  * Template Name: Pagination Template
  */
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
-get_header();
+// Header inclusion
+if (function_exists('get_header')) {
+    if (file_exists(get_template_directory() . '/header.php')) {
+        get_header(); // Include the currently active theme's header.
+    } else {
+        // Fallback for block themes
+        echo '<!DOCTYPE html><html><head>';
+        wp_head();
+        echo '</head><body>';
+    }
+}
 
 ?>
 
@@ -74,4 +84,13 @@ $paginate = paginate_links(array(
     <div class="nav-links"><?php echo wp_kses_post($paginate); ?></div>
 </div>
 <?php
-get_footer();
+// Footer inclusion
+if (function_exists('get_footer')) {
+    if (file_exists(get_template_directory() . '/footer.php')) {
+        get_footer(); // Include the currently active theme's footer.
+    } else {
+        // Fallback for block themes
+        wp_footer();
+        echo '</body></html>';
+    }
+}

@@ -1,7 +1,7 @@
 === PT Filter ===
 Contributors: aponwpdev
 Requires at least: 6.1
-Tested up to: 6.4
+Tested up to: 6.5
 Stable tag: 1.0.0
 Requires PHP: 7.3
 Version: 1.0.0
@@ -21,6 +21,6 @@ PT Filter is the most acustom post ajax page template. It provides features like
 
 == Installation ==
 
-1. Upload the `pt-filter` folder to the `/wp-content/plugins/` directory.
+1. Upload the `ptfilter` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Configure the plugin settings in the WordPress admin.

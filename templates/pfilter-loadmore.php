@@ -3,7 +3,17 @@
  * Template Name: Load More Template
  */
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
-get_header();
+// Header inclusion
+if (function_exists('get_header')) {
+    if (file_exists(get_template_directory() . '/header.php')) {
+        get_header(); // Include the currently active theme's header.
+    } else {
+        // Fallback for block themes
+        echo '<!DOCTYPE html><html><head>';
+        wp_head();
+        echo '</head><body>';
+    }
+}
 
 $args = array(
     'post_type'      => 'portfolios',
@@ -32,15 +42,24 @@ if ($query->have_posts()) :
     ?>
 <?php wp_nonce_field('pt_filter_load_more_action', 'pt_filter_nonce_field'); ?>
 <div class="load-more-container text-center pt-5">
-    <button id="load-more-button"><?php echo esc_html('Load More', 'pt-filter') ?></button>
+    <button id="load-more-button"><?php echo esc_html('Load More', 'ptfilter') ?></button>
 </div>
 <?php
     wp_reset_postdata();
 else :
-    echo '<span class="text-center">' . esc_html('No posts found', 'pt-filter') . '</span>';
+    echo '<span class="text-center">' . esc_html('No posts found', 'ptfilter') . '</span>';
 endif;
 echo '</div>';
 echo '</div>';
 
-get_footer();
+// Footer inclusion
+if (function_exists('get_footer')) {
+    if (file_exists(get_template_directory() . '/footer.php')) {
+        get_footer(); // Include the currently active theme's footer.
+    } else {
+        // Fallback for block themes
+        wp_footer();
+        echo '</body></html>';
+    }
+}
 ?>

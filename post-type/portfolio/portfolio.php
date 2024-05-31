@@ -6,8 +6,8 @@ function ptf_filter_create_custom_post_type()
         'portfolios',
         array(
             'labels' => array(
-                'name' => __('Portfolios', 'ptf-filter'),
-                'singular_name' => __('Portfolios', 'ptf-filter'),
+                'name' => __('Portfolios', 'ptfilter'),
+                'singular_name' => __('Portfolios', 'ptfilter'),
             ),
             'public' => true,
             'has_archive' => true,

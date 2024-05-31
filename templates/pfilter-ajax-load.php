@@ -3,13 +3,24 @@
  * Template Name: Filter Template
 */
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
-get_header();
+// Header inclusion
+if (function_exists('get_header')) {
+    if (file_exists(get_template_directory() . '/header.php')) {
+        get_header(); // Include the currently active theme's header.
+    } else {
+        // Fallback for block themes
+        ?><!DOCTYPE html><html><head><?php
+        wp_head();
+        ?></head><body><?php
+    }
+}
+
 ?>
 
 <div class="apon-filter portfolio-filter text-center">
     <?php $nonce =  wp_create_nonce( "filter-button-nonce" ); ?>
     <button class="filter-button filter-all active" data-nonce="<?php echo esc_attr($nonce );?>"
-        data-category=""><?php echo esc_html('All', 'pt-filter'); ?></button>
+        data-category=""><?php echo esc_html('All', 'ptfilter'); ?></button>
 
     <?php
     $taxonomy = 'portfolio_category';
@@ -54,5 +65,13 @@ get_header();
 </div>
 
 <?php
-get_footer();
-?>
+// Footer inclusion
+if (function_exists('get_footer')) {
+    if (file_exists(get_template_directory() . '/footer.php')) {
+        get_footer(); // Include the currently active theme's footer.
+    } else {
+        // Fallback for block themes
+        wp_footer();
+        ?></body></html> <?php
+    }
+}

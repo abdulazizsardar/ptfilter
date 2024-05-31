@@ -7,7 +7,7 @@
  * Author:      Abdul Aziz Sardar
  * Author URI:  https://profiles.wordpress.org/aponwpdev/
  * License: GPLv2 or later
- * Text Domain: pt-filter
+ * Text Domain: ptfilter
  */
 
 if (!defined('ABSPATH')) {
@@ -27,13 +27,12 @@ require PTF_FILTER_DIR_PATH_PRO . 'functions/pfilter-functions.php';
 function ptf_filter_enqueue_custom_scripts()
 {
 
-    wp_enqueue_style('bootstrap', PTF_FILTER_DIR_URL_PRO . 'assets/css/bootstrap.min.css', array(), time());
-    wp_enqueue_style('ptf-template-style', PTF_FILTER_DIR_URL_PRO . 'assets/css/pfilter-template.css', array(), time());
+    wp_enqueue_style('bootstrap', PTF_FILTER_DIR_URL_PRO . 'assets/css/bootstrap.min.css', array(), PTF_FILTER_VERSION);
+    wp_enqueue_style('ptf-template-style', PTF_FILTER_DIR_URL_PRO . 'assets/css/pfilter-template.css', array(), PTF_FILTER_VERSION);
 
-
-    wp_enqueue_script('ptf-isotop-scripts', PTF_FILTER_DIR_URL_PRO . 'assets/js/isotope.js', array('jquery', 'imagesloaded'), time(), true);
-    wp_enqueue_script('ptf-ajax-load', PTF_FILTER_DIR_URL_PRO . 'assets/js/pfilter-ajax-load.js', array('jquery'), null, true);
-    wp_enqueue_script('pfilter-template-scripts', PTF_FILTER_DIR_URL_PRO . 'assets/js/pfilter-template.js', array('jquery'), time(), true);
+    wp_enqueue_script('ptf-isotop-scripts', PTF_FILTER_DIR_URL_PRO . 'assets/js/isotope.js', array('jquery', 'imagesloaded'), PTF_FILTER_VERSION, true);
+    wp_enqueue_script('ptf-ajax-load', PTF_FILTER_DIR_URL_PRO . 'assets/js/pfilter-ajax-load.js', array('jquery'), PTF_FILTER_VERSION, true);
+    wp_enqueue_script('pfilter-template-scripts', PTF_FILTER_DIR_URL_PRO . 'assets/js/pfilter-template.js', array('jquery'), PTF_FILTER_VERSION, true);
 
 
     wp_localize_script('ptf-ajax-load', 'ajax_filter_params', array(
@@ -48,17 +47,17 @@ add_action('plugins_loaded', 'ptf_filter_load_text_domain');
 
 function ptf_filter_load_text_domain() {
 
-    load_plugin_textdomain('pt-filter', false, plugin_basename(dirname(__FILE__)) . '/languages');  
+    load_plugin_textdomain('ptfilter', false, plugin_basename(dirname(__FILE__)) . '/languages');  
     
 }
 
 function ptf_filter_custom_page_template($templates)
 {
-    $templates['pfilter-template.php'] = __("Filter Template", "pt-filter");
-    $templates['pfilter-template-pagination.php'] = __("Pagination Template", "pt-filter");
-    $templates['pfilter-ajax-load.php'] = __("Ajax Load", "pt-filter");
-    $templates['pfilter-loadmore.php'] = __("Load More", "pt-filter");
-    $templates['pfilter-ajaxloadmoreandfilter.php'] = __("Ajax Filter And Loadmore", "pt-filter");
+    $templates['pfilter-template.php'] = __("Filter Template", "ptfilter");
+    $templates['pfilter-template-pagination.php'] = __("Pagination Template", "ptfilter");
+    $templates['pfilter-ajax-load.php'] = __("Ajax Load", "ptfilter");
+    $templates['pfilter-loadmore.php'] = __("Load More", "ptfilter");
+    $templates['pfilter-ajaxloadmoreandfilter.php'] = __("Ajax Filter And Loadmore", "ptfilter");
     return $templates;
 }
 
