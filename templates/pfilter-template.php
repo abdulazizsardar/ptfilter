@@ -19,38 +19,38 @@ if (function_exists('get_header')) {
 
 
 ?>
-<div class="apon-filter portfolio-filter text-center">
-    <button class="active" data-filter="*"> <?php echo esc_html('All', 'ptfilter') ?> </button>
+<div class="portfolio-filter text-center">
+    <button class="active" data-filter="*"> <?php echo esc_html__('All', 'ptfilter') ?> </button>
 
     <?php
-    $taxonomy = 'portfolio_category';
+    $taxonomy = 'ptfilter_portfolio_category';
     $select_cat = get_terms($taxonomy);
 
     foreach ($select_cat as $term) {
         $term_name = $term->name;
         $term_slug = $term->slug;
     ?>
-    <button data-filter=".filter_<?php echo esc_attr($term_slug); ?>"><?php echo esc_html($term_name); ?></button>
+    <button data-filter=".filter_<?php echo esc_attr($term_slug); ?>"><?php echo esc_html__($term_name); ?></button>
     <?php
     }
     ?>
 
 </div>
 <div class="container">
-    <div class="grid row">
+    <div class="grid row ">
         <?php
         if (empty($cat)) {
             $best_wp = new wp_Query(array(
-                'post_type'      => 'portfolios',
+                'post_type'      => 'ptfilter_portfolios',
                 'posts_per_page' => -1,
             ));
         } else {
             $best_wp = new wp_Query(array(
-                'post_type'      => 'portfolios',
+                'post_type'      => 'ptfilter_portfolios',
                 'posts_per_page' => -1,
                 'tax_query'      => array(
                     array(
-                        'taxonomy' => 'portfolio-category',
+                        'taxonomy' => 'ptfilter_portfolio_category',
                         'field'    => 'slug',
                         'terms'    => $cat
                     ),
@@ -60,7 +60,7 @@ if (function_exists('get_header')) {
 
         while ($best_wp->have_posts()) : $best_wp->the_post();
 
-            $termsArray = get_the_terms($best_wp->ID, 'portfolio_category');
+            $termsArray = get_the_terms($best_wp->ID, 'ptfilter_portfolio_category');
             $termsString = '';
             $termsSlug = '';
             if (!empty($termsArray)) {

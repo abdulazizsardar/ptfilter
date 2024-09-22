@@ -1,6 +1,6 @@
 <?php
 /*
- * Template Name: Filter Template
+ * Template Name: Ajax Load
 */
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 // Header inclusion
@@ -17,19 +17,19 @@ if (function_exists('get_header')) {
 
 ?>
 
-<div class="apon-filter portfolio-filter text-center">
+<div class="portfolio-filter text-center">
     <?php $nonce =  wp_create_nonce( "filter-button-nonce" ); ?>
     <button class="filter-button filter-all active" data-nonce="<?php echo esc_attr($nonce );?>"
-        data-category=""><?php echo esc_html('All', 'ptfilter'); ?></button>
+        data-category=""><?php echo esc_html__('All', 'ptfilter'); ?></button>
 
     <?php
-    $taxonomy = 'portfolio_category';
+    $taxonomy = 'ptfilter_portfolio_category';
     $select_cat = get_terms($taxonomy);
 
     foreach ($select_cat as $category) {
     ?>
     <button class="filter-button" data-nonce="<?php echo esc_attr($nonce );?>"
-        data-category="<?php echo esc_attr($category->slug); ?>"><?php echo esc_html($category->name); ?></button>
+        data-category="<?php echo esc_attr($category->slug); ?>"><?php echo esc_html__($category->name); ?></button>
     <?php
     }
     ?>
@@ -40,7 +40,7 @@ if (function_exists('get_header')) {
     <div class="grid row" id="ajax-filter-container">
         <?php
         $all_posts = new WP_Query(array(
-            'post_type'      => 'portfolios',
+            'post_type'      => 'ptfilter_portfolios',
             'posts_per_page' => -1,
         ));
 

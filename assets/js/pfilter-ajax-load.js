@@ -9,16 +9,16 @@
             $(document).on('click', '.filter-button', function(e) {
                 var selectedCategory = $(this).data('category');
                 var pt_nonce2 = $(this).data('nonce');
-                loadContent(selectedCategory,pt_nonce2);
+                ptfilterloadContent(selectedCategory,pt_nonce2);
             });
 
             $(document).on('click', '.filter-all', function(e) {
                 let cat = 'all';
                 var pt_nonce2 = $(this).data('nonce');
-                loadContent(cat,pt_nonce2);
+                ptfilterloadContent(cat,pt_nonce2);
             });
 
-            function loadContent(category,pt_nonce2) {
+            function ptfilterloadContent(category,pt_nonce2) {
                 
                 var data = {
                     action: 'ajax_filter',
@@ -39,7 +39,7 @@
             }
 
             
-           // console.log(pt_nonce)
+          
         //// *=====* Ajax Loadmore Button Code Here *======* ////
         var page = 2; 
             $('#load-more-button').on('click', function () {

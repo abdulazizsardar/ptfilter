@@ -25,7 +25,7 @@ if (function_exists('get_header')) {
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
         $args = array(
-            'post_type'      => 'portfolios',
+            'post_type'      => 'ptfilter_portfolios',
             'posts_per_page' => 3,
             'paged'          => $paged,
         );
@@ -49,10 +49,17 @@ if (function_exists('get_header')) {
             $termsSlug = '';
             if (!empty($termsArray)) {
                 foreach ($termsArray as $term) {
-                    $termsString .= 'filter_' . $term->slug . ' ';
-                    $termsSlug .= $term->slug;
+                    // Check if $term is an object or an array and access 'slug' accordingly
+                    if (is_object($term)) {
+                        $termsString .= 'filter_' . $term->slug . ' ';
+                        $termsSlug .= $term->slug;
+                    } elseif (is_array($term) && isset($term['slug'])) {
+                        $termsString .= 'filter_' . $term['slug'] . ' ';
+                        $termsSlug .= $term['slug'];
+                    }
                 }
             }
+            
 
         ?>
 
@@ -78,12 +85,14 @@ if (function_exists('get_header')) {
 $paginate = paginate_links(array(
     'total' => $best_wp->max_num_pages
 ));
+if ($paginate) {
 ?>
 
 <div class="best_wp-pagination-area text-center">
     <div class="nav-links"><?php echo wp_kses_post($paginate); ?></div>
 </div>
 <?php
+}
 // Footer inclusion
 if (function_exists('get_footer')) {
     if (file_exists(get_template_directory() . '/footer.php')) {

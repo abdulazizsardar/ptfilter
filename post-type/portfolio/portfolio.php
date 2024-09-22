@@ -1,36 +1,38 @@
 <?php
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
-function ptf_filter_create_custom_post_type()
+
+
+function ptfilter_create_custom_post_type()
 {
     register_post_type(
-        'portfolios',
+        'ptfilter_portfolios',
         array(
             'labels' => array(
-                'name' => __('Portfolios', 'ptfilter'),
-                'singular_name' => __('Portfolios', 'ptfilter'),
+                'name' => esc_html__('Ptfilter Portfolios', 'ptfilter'),
+                'singular_name' => esc_html__('Ptfilter Portfolios', 'ptfilter'),
             ),
             'public' => true,
             'has_archive' => true,
             'menu_icon' => 'dashicons-book',
             'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
-            'rewrite' => array('slug' => 'portfolios'),
+            'rewrite' => array('slug' => 'ptfilter-portfolios'),
         )
     );
 }
-add_action('init', 'ptf_filter_create_custom_post_type');
+add_action('init', 'ptfilter_create_custom_post_type');
 
 
-function ptf_filter_create_custom_taxonomy()
+function ptfilter_create_custom_taxonomy()
 {
     register_taxonomy(
-        'portfolio_category',
-        'portfolios',
+        'ptfilter_portfolio_category',
+        'ptfilter_portfolios',
         array(
-            'label' => 'Portfolio Categories',
+            'label' => 'Ptfilter Portfolio Categories',
             'hierarchical' => true,
             'public' => true,
-            'rewrite' => array('slug' => 'portfolio-portfolio'),
+            'rewrite' => array('slug' => 'ptfilter-portfolio-category'),
         )
     );
 }
-add_action('init', 'ptf_filter_create_custom_taxonomy');
+add_action('init', 'ptfilter_create_custom_taxonomy');
