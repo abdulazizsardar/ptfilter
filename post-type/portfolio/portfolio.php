@@ -8,8 +8,8 @@ function ptfilter_create_custom_post_type()
         'ptfilter_portfolios',
         array(
             'labels' => array(
-                'name' => esc_html__('Ptfilter Portfolios', 'ptfilter'),
-                'singular_name' => esc_html__('Ptfilter Portfolios', 'ptfilter'),
+                'name' => esc_html__('Ptfilter Portfolios', 'pt-filter'),
+                'singular_name' => esc_html__('Ptfilter Portfolios', 'pt-filter'),
             ),
             'public' => true,
             'has_archive' => true,
