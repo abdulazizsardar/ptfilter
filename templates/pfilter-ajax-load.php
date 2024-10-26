@@ -20,7 +20,7 @@ if (function_exists('get_header')) {
 <div class="portfolio-filter text-center">
     <?php $nonce =  wp_create_nonce( "filter-button-nonce" ); ?>
     <button class="filter-button filter-all active" data-nonce="<?php echo esc_attr($nonce );?>"
-        data-category=""><?php echo esc_html__('All', 'ptfilter'); ?></button>
+        data-category=""><?php echo esc_html__('All', 'pt-filter'); ?></button>
 
     <?php
     $taxonomy = 'ptfilter_portfolio_category';
@@ -29,7 +29,7 @@ if (function_exists('get_header')) {
     foreach ($select_cat as $category) {
     ?>
     <button class="filter-button" data-nonce="<?php echo esc_attr($nonce );?>"
-        data-category="<?php echo esc_attr($category->slug); ?>"><?php echo esc_html__($category->name); ?></button>
+        data-category="<?php echo esc_attr($category->slug); ?>"><?php echo esc_html($category->name); ?></button>
     <?php
     }
     ?>
