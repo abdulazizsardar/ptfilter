@@ -42,12 +42,12 @@ if ($query->have_posts()) :
     ?>
 <?php wp_nonce_field('pt_filter_load_more_action', 'pt_filter_nonce_field'); ?>
 <div class="load-more-container text-center pt-5">
-    <button id="load-more-button"><?php echo esc_html__('Load More', 'ptfilter') ?></button>
+    <button id="load-more-button"><?php echo esc_html__('Load More', 'pt-filter') ?></button>
 </div>
 <?php
     wp_reset_postdata();
 else :
-    echo '<span class="text-center">' . esc_html__('No posts found', 'ptfilter') . '</span>';
+    echo '<span class="text-center">' . esc_html__('No posts found', 'pt-filter') . '</span>';
 endif;
 echo '</div>';
 echo '</div>';
