@@ -6,7 +6,7 @@
  * Version:     1.0.0
  * Author:      Abdul Aziz Sardar
  * Author URI:  https://profiles.wordpress.org/aponwpdev/
- * Text Domain: ptfilter
+ * Text Domain: pt-filter
  * License: GPL v2 or later
  * License URI:http://www.gnu.org/licenses/gpl-2.0.txt
  * Requires at least: 6.2
@@ -52,16 +52,16 @@ add_action('plugins_loaded', 'ptfilter_load_text_domain');
 
 function ptfilter_load_text_domain() {
 
-    load_plugin_textdomain('ptfilter', false, plugin_basename(dirname(__FILE__)) . '/languages');  
+    load_plugin_textdomain('pt-filter', false, plugin_basename(dirname(__FILE__)) . '/languages');  
     
 }
 
 function ptfilter_custom_page_template($templates)
 {
-    $templates['pfilter-template.php'] = esc_html__("Filter Template", "ptfilter");
-    $templates['pfilter-template-pagination.php'] = esc_html__("Pagination Template", "ptfilter");
-    $templates['pfilter-ajax-load.php'] = esc_html__("Ajax Load", "ptfilter");
-    $templates['pfilter-loadmore.php'] = esc_html__("Load More", "ptfilter");
+    $templates['pfilter-template.php'] = esc_html__("Filter Template", "pt-filter");
+    $templates['pfilter-template-pagination.php'] = esc_html__("Pagination Template", "pt-filter");
+    $templates['pfilter-ajax-load.php'] = esc_html__("Ajax Load", "pt-filter");
+    $templates['pfilter-loadmore.php'] = esc_html__("Load More", "pt-filter");
     return $templates;
 }
 
