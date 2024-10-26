@@ -20,7 +20,7 @@ if (function_exists('get_header')) {
 
 ?>
 <div class="portfolio-filter text-center">
-    <button class="active" data-filter="*"> <?php echo esc_html__('All', 'ptfilter') ?> </button>
+    <button class="active" data-filter="*"> <?php echo esc_html__('All', 'pt-filter') ?> </button>
 
     <?php
     $taxonomy = 'ptfilter_portfolio_category';
@@ -30,7 +30,7 @@ if (function_exists('get_header')) {
         $term_name = $term->name;
         $term_slug = $term->slug;
     ?>
-    <button data-filter=".filter_<?php echo esc_attr($term_slug); ?>"><?php echo esc_html__($term_name); ?></button>
+    <button data-filter=".filter_<?php echo esc_attr($term_slug); ?>"><?php echo esc_html($term_name); ?></button>
     <?php
     }
     ?>
