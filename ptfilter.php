@@ -1,16 +1,16 @@
 <?php
 /**
  * Plugin Name: PT Filter
- * Plugin URI: https://wordpress.org/plugins/ptfilter
+ * Plugin URI: devhiv.com/ptfilter
  * Description: This is custom post ajax filter
- * Version:     1.0.0
- * Author:      Abdul Aziz Sardar
+ * Version:     1.0.1
+ * Author:      aponwpdev
  * Author URI:  https://profiles.wordpress.org/aponwpdev/
  * Text Domain: pt-filter
  * License: GPL v2 or later
  * License URI:http://www.gnu.org/licenses/gpl-2.0.txt
  * Requires at least: 6.2
- * Tested up to: 6.6
+ * Tested up to: 6.6.2
  * Requires PHP: 7.4
  * Domain Path: /languages
  */
@@ -22,8 +22,7 @@ define('PTFILTER_PLUGIN_FILE', __FILE__);
 define('PTFILTER_DIR_PATH_PRO', plugin_dir_path(__FILE__));
 define('PTFILTER_PLUGIN_TEMPLATES_DIR', plugin_dir_path(__FILE__) . 'templates/');
 define('PTFILTER_DIR_URL_PRO', plugin_dir_url(__FILE__));
-define('PTFILTER_VERSION', '1.0.0');
-
+define('PTFILTER_VERSION', '1.0.1');
 
 require PTFILTER_DIR_PATH_PRO . 'post-type/post-type.php';
 require PTFILTER_DIR_PATH_PRO . 'functions/pfilter-functions.php';
@@ -51,9 +50,7 @@ add_action('wp_enqueue_scripts', 'ptfilter_enqueue_custom_scripts');
 add_action('plugins_loaded', 'ptfilter_load_text_domain');
 
 function ptfilter_load_text_domain() {
-
     load_plugin_textdomain('pt-filter', false, plugin_basename(dirname(__FILE__)) . '/languages');  
-    
 }
 
 function ptfilter_custom_page_template($templates)
@@ -103,24 +100,63 @@ function ptfilter_save_selected_template($post_id)
 
 add_action('save_post', 'ptfilter_save_selected_template');
 
-
-function ptfilter_apply_custom_page_template($template)
-{
-
-    $selected_template = get_post_meta(get_the_ID(), '_wp_page_template', true);
-
-    if ($selected_template === 'pfilter-template.php') {
-        // Load your custom template file when the "Pfilter Template" template is selected.
-        $template = PTFILTER_PLUGIN_TEMPLATES_DIR . 'pfilter-template.php';
-    } elseif ($selected_template === 'pfilter-ajax-load.php') {
-        $template = PTFILTER_PLUGIN_TEMPLATES_DIR . 'pfilter-ajax-load.php';
-    } elseif ($selected_template === 'pfilter-loadmore.php') {
-        $template = PTFILTER_PLUGIN_TEMPLATES_DIR . 'pfilter-loadmore.php';
-    } elseif($selected_template === 'pfilter-template-pagination.php') {
-        $template = PTFILTER_PLUGIN_TEMPLATES_DIR . 'pfilter-template-pagination.php';
+// Function to load the AJAX Load Template
+if ( ! function_exists( 'ptfilter_ajax_load_shortcode' ) ) {
+    function ptfilter_ajax_load_shortcode() {
+        ob_start();
+        $template_path = plugin_dir_path( __FILE__ ) . 'shortcode-templates/ajax-load-template.php';
+        // Check if the template file exists before including it
+        if ( file_exists( $template_path ) ) {
+            include $template_path;
+        }
+        return ob_get_clean();
     }
-
-
-    return $template;
 }
-add_filter('template_include', 'ptfilter_apply_custom_page_template');
+// Function to load the AJAX Load More button Template
+if( ! function_exists( 'ptfilter_ajax_load_more_shortcode' )){
+    function ptfilter_ajax_load_more_shortcode(){
+        ob_start();
+        $template_path = plugin_dir_path(__FILE__) . 'shortcode-templates/ajax-loadmore-template.php';
+         // Check if the template file exists before including it
+         if ( file_exists( $template_path ) ) {
+            include $template_path;
+        }
+        return ob_get_clean();
+    }
+}
+
+// Function to load the isotop filter template
+if( ! function_exists( 'ptfilter_isotop_filter_shortcode' )){
+    function ptfilter_isotop_filter_shortcode(){
+        ob_start();
+        $template_path = plugin_dir_path(__FILE__) . 'shortcode-templates/isotop-load-template.php';
+         // Check if the template file exists before including it
+         if ( file_exists( $template_path ) ) {
+            include $template_path;
+        }
+        return ob_get_clean();
+    }
+}
+
+// Function to pagination template
+if( ! function_exists( 'ptfilter_pagination_shortcode' )){
+    function ptfilter_pagination_shortcode(){
+        ob_start();
+        $template_path = plugin_dir_path(__FILE__) . 'shortcode-templates/pagination-template.php';
+         // Check if the template file exists before including it
+         if ( file_exists( $template_path ) ) {
+            include $template_path;
+        }
+        return ob_get_clean();
+    }
+}
+
+
+// Register the shortcode
+function ptfilter_register_shortcodes() {
+    add_shortcode('ptfilter_pagination', 'ptfilter_pagination_shortcode');
+    add_shortcode('ptfilter_ajax_load_more_button', 'ptfilter_ajax_load_more_shortcode');
+    add_shortcode('ptfilter_load_iso_filter', 'ptfilter_isotop_filter_shortcode');
+    add_shortcode('ptfilter_ajax_load', 'ptfilter_ajax_load_shortcode');
+}
+add_action('init', 'ptfilter_register_shortcodes');

@@ -3,7 +3,7 @@
         
         //// *=====* Ajax Filtering Code Here *======* ////
             var container = $('#ajax-filter-container');
-            var categoryContainer = $('#ajax-category-container');
+            // var categoryContainer = $('#ajax-category-container');
 
 
             $(document).on('click', '.filter-button', function(e) {
@@ -25,6 +25,7 @@
                     category: category,
                     nonce: pt_nonce2,
                 };
+                
                 $.ajax({
                     type: 'POST',
                     url: ajax_filter_params.ajax_url,

@@ -44,11 +44,9 @@ function ptfilter_ajax_filter_function()
     }
 
     $query = new WP_Query($args);
-    echo '<div class="container">';
-    echo '<div class="row">';
     while ($query->have_posts()) : $query->the_post();
 ?>
-<div class="col-lg-4 grid-item">
+<div class="col-lg-4 col-md-6 col-sm-6 col-12 grid-item">
     <div class="portfolio-item content-overlay">
         <?php if (has_post_thumbnail()) : ?>
         <a href="<?php the_permalink(); ?>">
@@ -64,8 +62,6 @@ function ptfilter_ajax_filter_function()
     endwhile;
     wp_reset_postdata();
     die();
-    echo "</div>";
-    echo "</div>";
 }
 add_action('wp_ajax_ajax_filter', 'ptfilter_ajax_filter_function');
 add_action('wp_ajax_nopriv_ajax_filter', 'ptfilter_ajax_filter_function');
