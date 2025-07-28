@@ -160,3 +160,6 @@ function ptfilter_register_shortcodes() {
     add_shortcode('ptfilter_ajax_load', 'ptfilter_ajax_load_shortcode');
 }
 add_action('init', 'ptfilter_register_shortcodes');
+
+
+// testing
